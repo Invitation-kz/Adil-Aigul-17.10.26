@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Әділ & Айгүл</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@100;300;400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -223,33 +222,33 @@
   });
 </script>
 
-<!-- AUDIO - Музыканы дұрыс ойнату үшін -->
+<!-- AUDIO -->
 <audio id="backgroundMusic" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <!-- IMAGE 1 -->
-<div class="element-animation"><img src="photo1.png" alt="photo1"></div>
+<div class="element-animation"><img src="photo1.jpg" alt="photo1"></div>
 
 <!-- IMAGE 2 -->
-<div class="element-animation"><img src="photo2.png" alt="photo2"></div>
+<div class="element-animation"><img src="photo2.jpg" alt="photo2"></div>
 
 <!-- IMAGE 3 -->
-<div class="element-animation"><img src="photo3.png" alt="photo3"></div>
+<div class="element-animation"><img src="photo3.jpg" alt="photo3"></div>
 
 <!-- IMAGE 4 (map) -->
 <div class="element-animation">
   <a href="https://2gis.kz/semey/geo/70030076250487585" target="_blank">
-    <img src="photo4.png" alt="photo4">
+    <img src="photo4.jpg" alt="photo4">
   </a>
 </div>
 
 <!-- IMAGE 5 -->
-<div class="element-animation"><img src="photo5.png" alt="photo5"></div>
+<div class="element-animation"><img src="photo5.jpg" alt="photo5"></div>
 
 <!-- IMAGE 6 + TIMER -->
 <div class="timer-wrapper element-animation" style="position:relative;">
-  <img src="photo6.png" alt="photo6">
+  <img src="photo6.jpg" alt="photo6">
   <div class="timer-overlay">
     <div class="timer-grid">
       <div class="timer-item">
@@ -276,7 +275,7 @@
 </div>
 
 <!-- IMAGE 7 -->
-<div class="element-animation"><img src="photo7.png" alt="photo7"></div>
+<div class="element-animation"><img src="photo7.jpg" alt="photo7"></div>
 
 <!-- FORM -->
 <div class="form-wrapper">
@@ -314,22 +313,21 @@
 <!-- IMAGE 8 (Instagram) -->
 <div class="element-animation">
   <a href="https://www.instagram.com/toiga_shaqyrtugo/" target="_blank">
-    <img src="photo8.png" alt="photo8">
+    <img src="photo8.jpg" alt="photo8">
   </a>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // --- Музыканы автоматты түрде ойнату ---
+    // --- МУЗЫКАНЫ ОЙНАТУ ---
     const audio = document.getElementById('backgroundMusic');
-    
-    // Музыканы ойнатудың бірнеше әдісі
-    function playAudio() {
+
+    function playMusic() {
       audio.play().then(() => {
         console.log('Музыка ойнап жатыр');
-      }).catch((error) => {
-        console.log('Музыка ойнату қатесі:', error);
-        // Егер автоматты ойнату блокталса, пайдаланушы әрекетінен кейін ойнату
+      }).catch((err) => {
+        console.log('Автоматты ойнату блокталды. Пайдаланушы әрекетін күту...');
+        // Пайдаланушы басқанда ойнату
         document.addEventListener('click', function playOnClick() {
           audio.play();
           document.removeEventListener('click', playOnClick);
@@ -342,7 +340,7 @@
     }
 
     // Бет жүктелгеннен кейін музыканы ойнату
-    setTimeout(playAudio, 300);
+    setTimeout(playMusic, 500);
 
     // Fade-in
     const observer = new IntersectionObserver((entries) => {
@@ -395,20 +393,22 @@
       hiddenPeople.value = count;
     });
 
-    // Form submit
+    // --- ФОРМАНЫ ЖІБЕРУ (Apps Script-ке сәйкес) ---
     const form = document.getElementById('form');
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzed_5neOpvQv35LT35gF9NbpHa4Et50qFOq4bAPLDAOWr143e7PEmo0uYngnKUlqk2/exec';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const attendance = document.querySelector('[name="attendance"]:checked');
       const people = document.querySelector('[name="people"]');
       const message = document.querySelector('[name="message"]');
 
+      // Apps Script-тегі өріс атауларына сәйкестендіру
       const data = {
-        attendance: attendance ? attendance.value : '',
-        people: people ? people.value : '',
-        message: message.value.trim()
+        name: attendance ? attendance.value : '',      // Apps Script: data.name
+        choice: people ? people.value : '',           // Apps Script: data.choice
+        message: message.value.trim()                 // Apps Script: data.message
       };
 
       try {
@@ -418,16 +418,18 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
+        alert('Жауабыңызға рахмет!');
       } catch (err) {
-        console.error('Submit error:', err);
+        console.error('Жіберу қатесі:', err);
+        alert('Қате орын алды. Қайталап көріңіз.');
       }
 
+      // Форманы тазалау
       if (attendance) attendance.checked = false;
       count = 1;
       countDisplay.textContent = count;
       hiddenPeople.value = count;
       message.value = '';
-      alert('Жауабыңызға рахмет!');
     });
 
     // Autoscroll
