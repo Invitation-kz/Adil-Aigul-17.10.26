@@ -27,6 +27,7 @@
       display: block;
     }
 
+    /* Фотолардың пайда болу анимациясы */
     .element-animation {
       opacity: 0;
       transition: opacity 1.2s ease;
@@ -35,7 +36,7 @@
       opacity: 1;
     }
 
-    /* TIMER */
+    /* ТАЙМЕР - ДӘЛ СУРЕТТЕГІДЕЙ */
     .timer-wrapper {
       position: relative;
       width: 100%;
@@ -54,25 +55,38 @@
       justify-content: center;
       align-items: center;
       pointer-events: none;
+      text-align: center;
+    }
+    .timer-title {
+      font-size: clamp(1.2rem, 4vw, 2.5rem);
+      font-weight: 300;
+      letter-spacing: 6px;
+      color: #000000;
+      margin-bottom: 2px;
+    }
+    .timer-subtitle {
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      font-weight: 200;
+      letter-spacing: 4px;
+      color: #000000;
+      margin-bottom: 8px;
     }
     .timer-grid {
       display: grid;
       grid-template-columns: repeat(4, auto);
-      gap: 20px 40px;
+      gap: 10px 25px;
       justify-items: center;
       align-items: center;
       pointer-events: auto;
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(2px);
-      padding: 15px 30px;
-      border-radius: 20px;
+      background: transparent;
+      padding: 10px 20px;
     }
     .timer-item {
       text-align: center;
     }
     .timer-item .number {
       display: block;
-      font-size: 2.8rem;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 300;
       color: #000000;
       letter-spacing: 2px;
@@ -80,21 +94,21 @@
     }
     .timer-item .label {
       display: block;
-      font-size: 0.7rem;
+      font-size: clamp(0.6rem, 1.5vw, 0.9rem);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       color: #000000;
       margin-top: 2px;
       font-weight: 300;
     }
     .timer-divider {
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 5vw, 3rem);
       font-weight: 100;
       color: #000000;
       padding-top: 5px;
     }
 
-    /* FORM */
+    /* ФОРМА */
     .form-wrapper {
       background: #f1eff1;
       padding: 10px 15px 30px;
@@ -180,73 +194,44 @@
       color: #ffffff;
     }
 
-    .sakura {
-      pointer-events: none;
-      position: fixed;
-    }
-
     @media (max-width: 576px) {
       .timer-grid {
-        gap: 10px 20px;
-        padding: 12px 15px;
-      }
-      .timer-item .number {
-        font-size: 2rem;
+        gap: 5px 12px;
+        padding: 8px 10px;
       }
       .timer-divider {
-        font-size: 1.4rem;
+        padding-top: 2px;
       }
     }
   </style>
 </head>
 <body>
 
-<!-- SAKURA -->
-<script>
-  (function(){function Sakura(e,t){if(void 0===e)throw Error("No selector present. Define an element.");this.el=document.querySelector(e);var a={className:"sakura",fallSpeed:1,maxSize:14,minSize:10,delay:300,colors:[{gradientColorStart:"rgba(200,200,200,0.7)",gradientColorEnd:"rgba(150,150,150,0.5)",gradientColorDegree:120}]};function n(e,t){return Object.keys(e).forEach(function(a){t&&Object.prototype.hasOwnProperty.call(t,a)&&(e[a]=t[a])}),e}this.settings=n(a,t),this.el.style.overflowX="hidden";var o=this;function r(e){return e[Math.floor(Math.random()*e.length)]}function i(e,t){return Math.floor(Math.random()*(t-e+1))+e}var s=["webkit","moz","MS","o",""];function l(e,t,a){for(var n=0;n<s.length;n++){var o=t;s[n]||(o=t.toLowerCase()),e.addEventListener(s[n]+o,a,!1)}}function d(e){var t=e.getBoundingClientRect();return t.top>=0&&t.left>=0&&t.bottom<=(window.innerHeight||document.documentElement.clientHeight)&&t.right<=(window.innerWidth||document.documentElement.clientWidth)}this.createPetal=function(){if(o.el.dataset.sakuraAnimId)setTimeout(function(){window.requestAnimationFrame(o.createPetal)},o.settings.delay);var e={blowAnimations:["blow-soft-left","blow-medium-left","blow-soft-right","blow-medium-right"],swayAnimations:["sway-0","sway-1","sway-2","sway-3","sway-4","sway-5","sway-6","sway-7","sway-8"]},t=r(e.blowAnimations),a=r(e.swayAnimations),c=(document.documentElement.clientHeight*.007+Math.round(5*Math.random()))*o.settings.fallSpeed,p=[c+"s linear 0s 1",(c>30?c:30)-20+i(0,20)+"s linear 0s infinite",i(2,4)+"s linear 0s infinite"].join(", "),u=document.createElement("div");u.classList.add(o.settings.className);var m=i(o.settings.minSize,o.settings.maxSize),h=m-Math.floor(i(0,o.settings.minSize)/3),f=r(o.settings.colors);u.style.background="linear-gradient("+f.gradientColorDegree+"deg, "+f.gradientColorStart+", "+f.gradientColorEnd+")",u.style.webkitAnimation=p,u.style.animation=p,u.style.borderRadius=i(o.settings.maxSize,o.settings.maxSize+Math.floor(10*Math.random()))+"px "+i(1,Math.floor(h/4))+"px",u.style.height=m+"px",u.style.left=Math.random()*document.documentElement.clientWidth-100+"px",u.style.marginTop=-(Math.floor(20*Math.random())+15)+"px",u.style.width=h+"px",l(u,"AnimationEnd",function(){d(u)||u.remove()}),l(u,"AnimationIteration",function(){d(u)||u.remove()}),o.el.appendChild(u)},this.el.setAttribute("data-sakura-anim-id",window.requestAnimationFrame(this.createPetal))}Sakura.prototype.start=function(){this.el.dataset.sakuraAnimId?console.log("Sakura is already running."):(this.el.setAttribute("data-sakura-anim-id",window.requestAnimationFrame(this.createPetal)))},Sakura.prototype.stop=function(e){var t=this,a=this.el.dataset.sakuraAnimId;if(a&&(window.cancelAnimationFrame(a),this.el.setAttribute("data-sakura-anim-id","")),!e)setTimeout(function(){for(var e=document.getElementsByClassName(t.settings.className);e.length>0;)e[0].parentNode.removeChild(e[0])},this.settings.delay+50)};window.Sakura=Sakura})();
-
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof Sakura !== 'undefined') {
-      new Sakura('body', {
-        colors: [
-          { gradientColorStart: 'rgba(200,200,200,0.6)', gradientColorEnd: 'rgba(180,180,180,0.4)', gradientColorDegree: 120 },
-          { gradientColorStart: 'rgba(180,180,180,0.6)', gradientColorEnd: 'rgba(160,160,160,0.4)', gradientColorDegree: 120 },
-          { gradientColorStart: 'rgba(220,220,220,0.6)', gradientColorEnd: 'rgba(190,190,190,0.4)', gradientColorDegree: 120 }
-        ],
-        delay: 60,
-        fallSpeed: 1.2,
-        minSize: 8,
-        maxSize: 12
-      });
-    }
-  });
-</script>
-
-<!-- AUDIO -->
+<!-- АУДИО -->
 <audio id="backgroundMusic" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- IMAGE 1 -->
+<!-- ФОТО 1 -->
 <div class="element-animation"><img src="photo1.jpg" alt="photo1"></div>
 
-<!-- IMAGE 2 -->
+<!-- ФОТО 2 -->
 <div class="element-animation"><img src="photo2.jpg" alt="photo2"></div>
 
-<!-- IMAGE 3 -->
+<!-- ФОТО 3 -->
 <div class="element-animation"><img src="photo3.jpg" alt="photo3"></div>
 
-<!-- IMAGE 4 (map) -->
+<!-- ФОТО 4 (КАРТА) -->
 <div class="element-animation">
   <a href="https://2gis.kz/semey/geo/70030076250487585" target="_blank">
     <img src="photo4.jpg" alt="photo4">
   </a>
 </div>
 
-<!-- IMAGE 5 -->
+<!-- ФОТО 5 -->
 <div class="element-animation"><img src="photo5.jpg" alt="photo5"></div>
 
-<!-- IMAGE 6 + TIMER -->
+<!-- ФОТО 6 + ТАЙМЕР -->
 <div class="timer-wrapper element-animation" style="position:relative;">
   <img src="photo6.jpg" alt="photo6">
   <div class="timer-overlay">
@@ -255,17 +240,17 @@
         <span class="number" id="days">00</span>
         <span class="label">Күн</span>
       </div>
-      <span class="timer-divider">:</span>
+      <span class="timer-divider">|</span>
       <div class="timer-item">
         <span class="number" id="hours">00</span>
         <span class="label">Сағат</span>
       </div>
-      <span class="timer-divider">:</span>
+      <span class="timer-divider">|</span>
       <div class="timer-item">
         <span class="number" id="minutes">00</span>
         <span class="label">Минут</span>
       </div>
-      <span class="timer-divider">:</span>
+      <span class="timer-divider">|</span>
       <div class="timer-item">
         <span class="number" id="seconds">00</span>
         <span class="label">Секунд</span>
@@ -274,21 +259,22 @@
   </div>
 </div>
 
-<!-- IMAGE 7 -->
+<!-- ФОТО 7 -->
 <div class="element-animation"><img src="photo7.jpg" alt="photo7"></div>
 
-<!-- FORM -->
+<!-- ФОРМА -->
 <div class="form-wrapper">
   <div class="form-container">
     <form id="form">
       <div class="form-inner">
-        <div class="title">Есіміңіз</div>
-
         <div class="radio-group">
+          
           <p>Жұбыңызбен келсеңіз, есімін жазыңыз</p>
-          <input type="radio" id="q1_yes" name="attendance" value="Әрине келемін" required>
+          <textarea name="message" id="message" placeholder="Есіміңіз" rows="1"></textarea>
+        
+          <input type="radio" id="q1_yes" name="name" value="Әрине келемін" required>
           <label for="q1_yes">Әрине келемін</label><br>
-          <input type="radio" id="q1_no" name="attendance" value="Өкінішке орай бара алмаймын">
+          <input type="radio" id="q1_no" name="name" value="Өкінішке орай бара алмаймын">
           <label for="q1_no">Өкінішке орай бара алмаймын</label>
         </div>
 
@@ -299,10 +285,8 @@
             <span id="peopleCount" style="font-size:1.3rem;min-width:30px;text-align:center;color:#000;">1</span>
             <button type="button" id="increase" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#000;padding:0 6px;">+</button>
           </div>
-          <input type="hidden" name="people" id="peopleHidden" value="1">
+          <input type="hidden" name="choice" id="choiceHidden" value="1">
         </div>
-
-        <textarea name="message" id="message" placeholder="Ізгі тілек қалдырсаңыз" rows="1"></textarea>
 
         <button type="submit" class="btn-submit">Жауапты жіберемін</button>
       </div>
@@ -310,7 +294,7 @@
   </div>
 </div>
 
-<!-- IMAGE 8 (Instagram) -->
+<!-- ФОТО 8 (INSTAGRAM) -->
 <div class="element-animation">
   <a href="https://www.instagram.com/toiga_shaqyrtugo/" target="_blank">
     <img src="photo8.jpg" alt="photo8">
@@ -319,15 +303,11 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // --- МУЗЫКАНЫ ОЙНАТУ ---
+    // --- МУЗЫКА ---
     const audio = document.getElementById('backgroundMusic');
-
-    function playMusic() {
-      audio.play().then(() => {
-        console.log('Музыка ойнап жатыр');
-      }).catch((err) => {
-        console.log('Автоматты ойнату блокталды. Пайдаланушы әрекетін күту...');
-        // Пайдаланушы басқанда ойнату
+    
+    function playAudio() {
+      audio.play().catch(() => {
         document.addEventListener('click', function playOnClick() {
           audio.play();
           document.removeEventListener('click', playOnClick);
@@ -338,11 +318,9 @@
         }, { once: true });
       });
     }
+    setTimeout(playAudio, 300);
 
-    // Бет жүктелгеннен кейін музыканы ойнату
-    setTimeout(playMusic, 500);
-
-    // Fade-in
+    // --- ФОТОЛАРДЫҢ ПАЙДА БОЛУЫ ---
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -353,7 +331,7 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.element-animation').forEach(el => observer.observe(el));
 
-    // Timer
+    // --- ТАЙМЕР ---
     function updateCountdown() {
       const end = new Date("October 17, 2026 17:00:00").getTime();
       const now = Date.now();
@@ -373,42 +351,36 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // People counter
+    // --- АДАМ САНЫ ---
     let count = 1;
-    const decreaseBtn = document.getElementById('decrease');
-    const increaseBtn = document.getElementById('increase');
-    const countDisplay = document.getElementById('peopleCount');
-    const hiddenPeople = document.getElementById('peopleHidden');
-
-    decreaseBtn.addEventListener('click', () => {
+    document.getElementById('decrease').addEventListener('click', () => {
       if (count > 1) {
         count--;
-        countDisplay.textContent = count;
-        hiddenPeople.value = count;
+        document.getElementById('peopleCount').textContent = count;
+        document.getElementById('choiceHidden').value = count;
       }
     });
-    increaseBtn.addEventListener('click', () => {
+    document.getElementById('increase').addEventListener('click', () => {
       count++;
-      countDisplay.textContent = count;
-      hiddenPeople.value = count;
+      document.getElementById('peopleCount').textContent = count;
+      document.getElementById('choiceHidden').value = count;
     });
 
-    // --- ФОРМАНЫ ЖІБЕРУ (Apps Script-ке сәйкес) ---
+    // --- ФОРМА ---
     const form = document.getElementById('form');
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzed_5neOpvQv35LT35gF9NbpHa4Et50qFOq4bAPLDAOWr143e7PEmo0uYngnKUlqk2/exec';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      const attendance = document.querySelector('[name="attendance"]:checked');
-      const people = document.querySelector('[name="people"]');
+      
+      const name = document.querySelector('[name="name"]:checked');
+      const choice = document.querySelector('[name="choice"]');
       const message = document.querySelector('[name="message"]');
 
-      // Apps Script-тегі өріс атауларына сәйкестендіру
       const data = {
-        name: attendance ? attendance.value : '',      // Apps Script: data.name
-        choice: people ? people.value : '',           // Apps Script: data.choice
-        message: message.value.trim()                 // Apps Script: data.message
+        name: name ? name.value : '',
+        choice: choice ? choice.value : '',
+        message: message.value.trim()
       };
 
       try {
@@ -418,21 +390,19 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
-        alert('Жауабыңызға рахмет!');
       } catch (err) {
-        console.error('Жіберу қатесі:', err);
-        alert('Қате орын алды. Қайталап көріңіз.');
+        console.error('Submit error:', err);
       }
 
-      // Форманы тазалау
-      if (attendance) attendance.checked = false;
+      if (name) name.checked = false;
       count = 1;
-      countDisplay.textContent = count;
-      hiddenPeople.value = count;
+      document.getElementById('peopleCount').textContent = count;
+      document.getElementById('choiceHidden').value = count;
       message.value = '';
+      alert('Жауабыңызға рахмет!');
     });
 
-    // Autoscroll
+    // --- АВТОСКРОЛЛ ---
     const SPEED_PX_PER_SEC = 100;
     const RESTART_DELAY_MS = 5000;
     let isRunning = false, resumeTimer = null, rafId = null, lastTs = 0, accum = 0;
