@@ -36,7 +36,7 @@
       opacity: 1;
     }
 
-    /* ТАЙМЕР - ДӘЛ СУРЕТТЕГІДЕЙ */
+    /* ТАЙМЕР - толығымен көлденең, бір жолды, түсі #f1eff1 */
     .timer-wrapper {
       position: relative;
       width: 100%;
@@ -57,38 +57,26 @@
       pointer-events: none;
       text-align: center;
     }
-    .timer-title {
-      font-size: clamp(1.2rem, 4vw, 2.5rem);
-      font-weight: 300;
-      letter-spacing: 6px;
-      color: #000000;
-      margin-bottom: 2px;
-    }
-    .timer-subtitle {
-      font-size: clamp(0.8rem, 2vw, 1.2rem);
-      font-weight: 200;
-      letter-spacing: 4px;
-      color: #000000;
-      margin-bottom: 8px;
-    }
     .timer-grid {
-      display: grid;
-      grid-template-columns: repeat(4, auto);
-      gap: 10px 25px;
-      justify-items: center;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
       align-items: center;
+      gap: 10px 20px;
       pointer-events: auto;
       background: transparent;
       padding: 10px 20px;
+      white-space: nowrap;
     }
     .timer-item {
       text-align: center;
+      display: inline-block;
     }
     .timer-item .number {
       display: block;
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 300;
-      color: #000000;
+      color: #f1eff1;  /* жаңа түс */
       letter-spacing: 2px;
       line-height: 1;
     }
@@ -97,15 +85,16 @@
       font-size: clamp(0.6rem, 1.5vw, 0.9rem);
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: #000000;
+      color: #f1eff1;  /* жаңа түс */
       margin-top: 2px;
       font-weight: 300;
     }
     .timer-divider {
       font-size: clamp(1.5rem, 5vw, 3rem);
       font-weight: 100;
-      color: #000000;
+      color: #f1eff1;  /* жаңа түс */
       padding-top: 5px;
+      display: inline-block;
     }
 
     /* ФОРМА */
@@ -120,14 +109,6 @@
       margin: 0 auto;
     }
     .form-inner {
-      text-align: center;
-    }
-    .form-inner .title {
-      font-size: 1.1rem;
-      font-weight: 300;
-      letter-spacing: 1px;
-      color: #000000;
-      margin-bottom: 15px;
       text-align: center;
     }
     .form-inner .radio-group {
@@ -196,11 +177,18 @@
 
     @media (max-width: 576px) {
       .timer-grid {
-        gap: 5px 12px;
+        gap: 5px 10px;
         padding: 8px 10px;
       }
       .timer-divider {
         padding-top: 2px;
+        font-size: 1.2rem;
+      }
+      .timer-item .number {
+        font-size: 1.8rem;
+      }
+      .timer-item .label {
+        font-size: 0.5rem;
       }
     }
   </style>
@@ -268,7 +256,6 @@
     <form id="form">
       <div class="form-inner">
         <div class="radio-group">
-          
           <p>Жұбыңызбен келсеңіз, есімін жазыңыз</p>
           <textarea name="message" id="message" placeholder="Есіміңіз" rows="1"></textarea>
         
@@ -303,22 +290,30 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // --- МУЗЫКА ---
+    // --- МУЗЫКАНЫ ДЕРЕУ ОЙНАТУ ---
     const audio = document.getElementById('backgroundMusic');
     
     function playAudio() {
       audio.play().catch(() => {
-        document.addEventListener('click', function playOnClick() {
-          audio.play();
-          document.removeEventListener('click', playOnClick);
-        }, { once: true });
-        document.addEventListener('touchstart', function playOnTouch() {
-          audio.play();
-          document.removeEventListener('touchstart', playOnTouch);
-        }, { once: true });
+        // Егер автоматты ойнату блокталса, пайдаланушы әрекетін күту
+        const resume = () => {
+          audio.play().catch(() => {});
+          document.removeEventListener('click', resume);
+          document.removeEventListener('touchstart', resume);
+        };
+        document.addEventListener('click', resume);
+        document.addEventListener('touchstart', resume);
       });
     }
-    setTimeout(playAudio, 300);
+
+    // Музыканы дереу ойнатуға тырысу (егер аудио жүктелген болса)
+    if (audio.readyState >= 2) {
+      playAudio();
+    } else {
+      audio.addEventListener('canplaythrough', playAudio);
+      // Қауіпсіздік: егер canplaythrough ұзаққа созылса, 1 секундтан кейін тырысу
+      setTimeout(playAudio, 1000);
+    }
 
     // --- ФОТОЛАРДЫҢ ПАЙДА БОЛУЫ ---
     const observer = new IntersectionObserver((entries) => {
