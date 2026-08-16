@@ -76,7 +76,7 @@
       display: block;
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 300;
-      color: #f1eff1;  /* жаңа түс */
+      color: #f1eff1;
       letter-spacing: 2px;
       line-height: 1;
     }
@@ -85,14 +85,14 @@
       font-size: clamp(0.6rem, 1.5vw, 0.9rem);
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: #f1eff1;  /* жаңа түс */
+      color: #f1eff1;
       margin-top: 2px;
       font-weight: 300;
     }
     .timer-divider {
       font-size: clamp(1.5rem, 5vw, 3rem);
       font-weight: 100;
-      color: #f1eff1;  /* жаңа түс */
+      color: #f1eff1;
       padding-top: 5px;
       display: inline-block;
     }
@@ -175,6 +175,67 @@
       color: #ffffff;
     }
 
+    /* МОДАЛЬНОЕ ОКНО - черно-белый стиль */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+    .modal-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .modal-content {
+      background: #ffffff;
+      padding: 40px 30px 45px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 380px;
+      width: 85%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      border: 1px solid #000000;
+    }
+    .modal-content img {
+      width: 100%;
+      max-width: 250px;
+      margin: 0 auto 20px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+    }
+    .modal-content button {
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Piazzolla', serif;
+      border: 1px solid #000000;
+    }
+    .modal-content button:hover {
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #000000;
+      transform: scale(1.03);
+    }
+    .modal-content button:active {
+      transform: scale(0.97);
+    }
+
     @media (max-width: 576px) {
       .timer-grid {
         gap: 5px 10px;
@@ -194,6 +255,14 @@
   </style>
 </head>
 <body>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div id="musicModal" class="modal-overlay">
+  <div class="modal-content">
+    <img src="photo.png" alt="приглашение">
+    <button id="playMusicBtn">Шақыртуды ашу</button>
+  </div>
+</div>
 
 <!-- АУДИО -->
 <audio id="backgroundMusic" loop preload="auto">
@@ -290,32 +359,51 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // --- МУЗЫКАНЫ ДЕРЕУ ОЙНАТУ ---
+    // --- Элементтер ---
+    const modal = document.getElementById('musicModal');
+    const playBtn = document.getElementById('playMusicBtn');
     const audio = document.getElementById('backgroundMusic');
-    
-    function playAudio() {
-      audio.play().catch(() => {
-        // Егер автоматты ойнату блокталса, пайдаланушы әрекетін күту
-        const resume = () => {
-          audio.play().catch(() => {});
-          document.removeEventListener('click', resume);
-          document.removeEventListener('touchstart', resume);
-        };
-        document.addEventListener('click', resume);
-        document.addEventListener('touchstart', resume);
+
+    // --- Функция закрытия модалки и запуска музыки ---
+    function openInvitation() {
+      // Запускаем музыку
+      audio.play().then(() => {
+        console.log('Музыка играет');
+      }).catch((err) => {
+        console.warn('Не удалось запустить музыку:', err);
       });
+
+      // Скрываем модалку с плавным исчезновением
+      modal.classList.add('hidden');
+      // Через 0.5с убираем из DOM, чтобы не мешать кликам
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 500);
+
+      // Показываем все скрытые элементы (если они были скрыты)
+      document.querySelectorAll('.element-animation').forEach(el => el.classList.add('element-show'));
+
+      // Запускаем автопрокрутку, если ещё не запущена
+      if (!rafId) {
+        rafId = requestAnimationFrame(loop);
+        startAuto();
+      }
     }
 
-    // Музыканы дереу ойнатуға тырысу (егер аудио жүктелген болса)
-    if (audio.readyState >= 2) {
-      playAudio();
-    } else {
-      audio.addEventListener('canplaythrough', playAudio);
-      // Қауіпсіздік: егер canplaythrough ұзаққа созылса, 1 секундтан кейін тырысу
-      setTimeout(playAudio, 1000);
-    }
+    // --- Обработчик клика по кнопке ---
+    playBtn.addEventListener('click', openInvitation);
 
-    // --- ФОТОЛАРДЫҢ ПАЙДА БОЛУЫ ---
+    // Также можно закрыть модалку по клику на фон (опционально)
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        openInvitation();
+      }
+    });
+
+    // --- ФОТОЛАРДЫҢ ПАЙДА БОЛУЫ (после модалки они уже показаны) ---
+    // Но если модалка закрыта, то они покажутся, но мы их покажем в openInvitation.
+    // Для безопасности добавим observer, но он сработает после закрытия модалки,
+    // т.к. элементы уже visible.
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -397,7 +485,7 @@
       alert('Жауабыңызға рахмет!');
     });
 
-    // --- АВТОСКРОЛЛ ---
+    // --- АВТОСКРОЛЛ (запускается после модалки) ---
     const SPEED_PX_PER_SEC = 100;
     const RESTART_DELAY_MS = 5000;
     let isRunning = false, resumeTimer = null, rafId = null, lastTs = 0, accum = 0;
@@ -446,10 +534,9 @@
       window.addEventListener(ev, onInteract, { passive: true })
     );
 
-    setTimeout(() => {
-      if (!rafId) rafId = requestAnimationFrame(loop);
-      startAuto();
-    }, 500);
+    // Не запускаем автопрокрутку сразу, она начнётся после модалки
+    // Но для инициализации rafId мы создадим его позже.
+    // В openInvitation мы запускаем loop и startAuto, если rafId нет.
   });
 </script>
 
