@@ -18,7 +18,7 @@
       box-sizing: border-box;
     }
     body {
-      background-color: #f5f2ef;
+      background-color: #f1eff1;
       font-family: 'Piazzolla', serif;
       overflow-x: hidden;
     }
@@ -30,12 +30,8 @@
     a {
       display: block;
     }
-    .content-block {
-      position: relative;
-      width: 100%;
-    }
 
-    /* Fade-in animation for images */
+    /* Fade-in animation */
     .element-animation {
       opacity: 0;
       transition: opacity 1.2s ease;
@@ -44,7 +40,7 @@
       opacity: 1;
     }
 
-    /* Countdown timer */
+    /* Countdown timer - Black & White */
     .timer-wrapper {
       position: relative;
       width: 100%;
@@ -62,8 +58,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: #3F3F3F;
-      text-shadow: 0 2px 10px rgba(255,255,255,0.6);
+      color: #000000;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.8);
       pointer-events: none;
     }
     .countdown-container {
@@ -71,13 +67,14 @@
       justify-content: center;
       align-items: baseline;
       gap: 5px;
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(2px);
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(4px);
       padding: 10px 20px;
       border-radius: 50px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
       pointer-events: auto;
       flex-wrap: wrap;
+      border: 1px solid #000000;
     }
     .countdown-item {
       text-align: center;
@@ -88,29 +85,30 @@
       font-size: 2.2rem;
       font-weight: 600;
       line-height: 1.2;
-      color: #2d2d2d;
+      color: #000000;
     }
     .countdown-item span:last-child {
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #444;
+      color: #000000;
     }
     .countdown-divider {
       font-size: 2rem;
       font-weight: 100;
-      color: #555;
+      color: #000000;
       padding: 0 2px;
     }
 
-    /* Form Styles */
+    /* Form Styles - Black & White */
     .form-container {
-      background: #F4F1EE;
+      background: #ffffff;
       padding: 25px 15px;
       border-radius: 20px;
       max-width: 500px;
       margin: 0 auto;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      border: 1px solid #000000;
     }
     .form-inner .radio-group {
       text-align: left;
@@ -119,68 +117,73 @@
     .form-inner .radio-group p {
       font-weight: 400;
       margin-bottom: 6px;
-      color: #1d1d1d;
+      color: #000000;
       font-size: 1.1rem;
     }
     .form-inner label {
       font-weight: 300;
       margin-left: 6px;
-      color: #222;
+      color: #000000;
     }
     .form-inner input[type="radio"] {
       margin-right: 4px;
-      accent-color: #829E64;
+      accent-color: #000000;
     }
     .people-selector {
       display: flex;
       align-items: center;
       gap: 15px;
-      background: white;
+      background: #ffffff;
       padding: 5px 15px;
       border-radius: 40px;
       width: fit-content;
-      border: 1px solid #d0cbc6;
+      border: 1px solid #000000;
     }
     .people-selector button {
       background: none;
       border: none;
       font-size: 1.5rem;
       font-weight: 300;
-      color: #2d2d2d;
+      color: #000000;
       padding: 0 8px;
       cursor: pointer;
       transition: 0.2s;
     }
     .people-selector button:hover {
       transform: scale(1.2);
-      color: #829E64;
+      color: #555555;
     }
     .people-selector span {
       font-size: 1.4rem;
       min-width: 30px;
       text-align: center;
       font-weight: 400;
+      color: #000000;
     }
     .form-inner textarea {
       width: 100%;
-      border: 1px solid #d0cbc6;
+      border: 1px solid #000000;
       border-radius: 30px;
       padding: 12px 18px;
       font-size: 0.95rem;
-      background: white;
+      background: #ffffff;
       resize: vertical;
       min-height: 50px;
       font-family: inherit;
+      color: #000000;
+    }
+    .form-inner textarea::placeholder {
+      color: #888888;
     }
     .form-inner textarea:focus {
       outline: none;
-      border-color: #829E64;
-      box-shadow: 0 0 0 3px rgba(130, 158, 100, 0.2);
+      border-color: #000000;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
     }
     .btn-submit {
-      background: linear-gradient(135deg, #7D9E56, #5f7d3e);
-      color: white;
-      border: none;
+      background: #000000;
+      color: #ffffff;
+      border: 1px solid #000000;
       border-radius: 40px;
       padding: 12px 30px;
       font-size: 1.1rem;
@@ -192,55 +195,11 @@
     }
     .btn-submit:hover {
       transform: scale(1.02);
-      box-shadow: 0 4px 15px rgba(130, 158, 100, 0.4);
+      background: #222222;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* Modal */
-    .modal-custom {
-      display: flex;
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-      backdrop-filter: blur(4px);
-    }
-    .modal-content-custom {
-      background: #F4F1EE;
-      padding: 30px 20px 40px;
-      border-radius: 30px;
-      text-align: center;
-      max-width: 380px;
-      width: 85%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    }
-    .modal-content-custom img {
-      border-radius: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-    .modal-content-custom button {
-      background: #829E64;
-      border: none;
-      padding: 12px 40px;
-      border-radius: 50px;
-      color: white;
-      font-size: 1.1rem;
-      font-weight: 400;
-      letter-spacing: 1px;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-    .modal-content-custom button:hover {
-      transform: scale(1.05);
-      background: #6d8a51;
-    }
-
-    /* Sakura (cherry blossom) */
+    /* Sakura - Black & White */
     .sakura {
       pointer-events: none;
       position: fixed;
@@ -269,19 +228,17 @@
 </head>
 <body>
 
-<!-- SAKURA JS (LEAVES) -->
+<!-- SAKURA JS (Black & White) -->
 <script>
-  // Sakura library (minified version for petals)
-  (function(){function Sakura(e,t){if(void 0===e)throw Error("No selector present. Define an element.");this.el=document.querySelector(e);var a={className:"sakura",fallSpeed:1,maxSize:14,minSize:10,delay:300,colors:[{gradientColorStart:"rgba(255, 183, 197, 0.9)",gradientColorEnd:"rgba(255, 197, 208, 0.9)",gradientColorDegree:120}]};function n(e,t){return Object.keys(e).forEach(function(a){t&&Object.prototype.hasOwnProperty.call(t,a)&&(e[a]=t[a])}),e}this.settings=n(a,t),this.el.style.overflowX="hidden";var o=this;function r(e){return e[Math.floor(Math.random()*e.length)]}function i(e,t){return Math.floor(Math.random()*(t-e+1))+e}var s=["webkit","moz","MS","o",""];function l(e,t,a){for(var n=0;n<s.length;n++){var o=t;s[n]||(o=t.toLowerCase()),e.addEventListener(s[n]+o,a,!1)}}function d(e){var t=e.getBoundingClientRect();return t.top>=0&&t.left>=0&&t.bottom<=(window.innerHeight||document.documentElement.clientHeight)&&t.right<=(window.innerWidth||document.documentElement.clientWidth)}this.createPetal=function(){if(o.el.dataset.sakuraAnimId)setTimeout(function(){window.requestAnimationFrame(o.createPetal)},o.settings.delay);var e={blowAnimations:["blow-soft-left","blow-medium-left","blow-soft-right","blow-medium-right"],swayAnimations:["sway-0","sway-1","sway-2","sway-3","sway-4","sway-5","sway-6","sway-7","sway-8"]},t=r(e.blowAnimations),a=r(e.swayAnimations),c=(document.documentElement.clientHeight*.007+Math.round(5*Math.random()))*o.settings.fallSpeed,p=[c+"s linear 0s 1",(c>30?c:30)-20+i(0,20)+"s linear 0s infinite",i(2,4)+"s linear 0s infinite"].join(", "),u=document.createElement("div");u.classList.add(o.settings.className);var m=i(o.settings.minSize,o.settings.maxSize),h=m-Math.floor(i(0,o.settings.minSize)/3),f=r(o.settings.colors);u.style.background="linear-gradient("+f.gradientColorDegree+"deg, "+f.gradientColorStart+", "+f.gradientColorEnd+")",u.style.webkitAnimation=p,u.style.animation=p,u.style.borderRadius=i(o.settings.maxSize,o.settings.maxSize+Math.floor(10*Math.random()))+"px "+i(1,Math.floor(h/4))+"px",u.style.height=m+"px",u.style.left=Math.random()*document.documentElement.clientWidth-100+"px",u.style.marginTop=-(Math.floor(20*Math.random())+15)+"px",u.style.width=h+"px",l(u,"AnimationEnd",function(){d(u)||u.remove()}),l(u,"AnimationIteration",function(){d(u)||u.remove()}),o.el.appendChild(u)},this.el.setAttribute("data-sakura-anim-id",window.requestAnimationFrame(this.createPetal))}Sakura.prototype.start=function(){this.el.dataset.sakuraAnimId?console.log("Sakura is already running."):(this.el.setAttribute("data-sakura-anim-id",window.requestAnimationFrame(this.createPetal)))},Sakura.prototype.stop=function(e){var t=this,a=this.el.dataset.sakuraAnimId;if(a&&(window.cancelAnimationFrame(a),this.el.setAttribute("data-sakura-anim-id","")),!e)setTimeout(function(){for(var e=document.getElementsByClassName(t.settings.className);e.length>0;)e[0].parentNode.removeChild(e[0])},this.settings.delay+50)};window.Sakura=Sakura})();
+  (function(){function Sakura(e,t){if(void 0===e)throw Error("No selector present. Define an element.");this.el=document.querySelector(e);var a={className:"sakura",fallSpeed:1,maxSize:14,minSize:10,delay:300,colors:[{gradientColorStart:"rgba(200,200,200,0.7)",gradientColorEnd:"rgba(150,150,150,0.5)",gradientColorDegree:120}]};function n(e,t){return Object.keys(e).forEach(function(a){t&&Object.prototype.hasOwnProperty.call(t,a)&&(e[a]=t[a])}),e}this.settings=n(a,t),this.el.style.overflowX="hidden";var o=this;function r(e){return e[Math.floor(Math.random()*e.length)]}function i(e,t){return Math.floor(Math.random()*(t-e+1))+e}var s=["webkit","moz","MS","o",""];function l(e,t,a){for(var n=0;n<s.length;n++){var o=t;s[n]||(o=t.toLowerCase()),e.addEventListener(s[n]+o,a,!1)}}function d(e){var t=e.getBoundingClientRect();return t.top>=0&&t.left>=0&&t.bottom<=(window.innerHeight||document.documentElement.clientHeight)&&t.right<=(window.innerWidth||document.documentElement.clientWidth)}this.createPetal=function(){if(o.el.dataset.sakuraAnimId)setTimeout(function(){window.requestAnimationFrame(o.createPetal)},o.settings.delay);var e={blowAnimations:["blow-soft-left","blow-medium-left","blow-soft-right","blow-medium-right"],swayAnimations:["sway-0","sway-1","sway-2","sway-3","sway-4","sway-5","sway-6","sway-7","sway-8"]},t=r(e.blowAnimations),a=r(e.swayAnimations),c=(document.documentElement.clientHeight*.007+Math.round(5*Math.random()))*o.settings.fallSpeed,p=[c+"s linear 0s 1",(c>30?c:30)-20+i(0,20)+"s linear 0s infinite",i(2,4)+"s linear 0s infinite"].join(", "),u=document.createElement("div");u.classList.add(o.settings.className);var m=i(o.settings.minSize,o.settings.maxSize),h=m-Math.floor(i(0,o.settings.minSize)/3),f=r(o.settings.colors);u.style.background="linear-gradient("+f.gradientColorDegree+"deg, "+f.gradientColorStart+", "+f.gradientColorEnd+")",u.style.webkitAnimation=p,u.style.animation=p,u.style.borderRadius=i(o.settings.maxSize,o.settings.maxSize+Math.floor(10*Math.random()))+"px "+i(1,Math.floor(h/4))+"px",u.style.height=m+"px",u.style.left=Math.random()*document.documentElement.clientWidth-100+"px",u.style.marginTop=-(Math.floor(20*Math.random())+15)+"px",u.style.width=h+"px",l(u,"AnimationEnd",function(){d(u)||u.remove()}),l(u,"AnimationIteration",function(){d(u)||u.remove()}),o.el.appendChild(u)},this.el.setAttribute("data-sakura-anim-id",window.requestAnimationFrame(this.createPetal))}Sakura.prototype.start=function(){this.el.dataset.sakuraAnimId?console.log("Sakura is already running."):(this.el.setAttribute("data-sakura-anim-id",window.requestAnimationFrame(this.createPetal)))},Sakura.prototype.stop=function(e){var t=this,a=this.el.dataset.sakuraAnimId;if(a&&(window.cancelAnimationFrame(a),this.el.setAttribute("data-sakura-anim-id","")),!e)setTimeout(function(){for(var e=document.getElementsByClassName(t.settings.className);e.length>0;)e[0].parentNode.removeChild(e[0])},this.settings.delay+50)};window.Sakura=Sakura})();
 
-  // Init sakura with custom colors
   document.addEventListener('DOMContentLoaded', function() {
     if (typeof Sakura !== 'undefined') {
       new Sakura('body', {
         colors: [
-          { gradientColorStart: 'rgba(200, 180, 130, 0.8)', gradientColorEnd: 'rgba(180, 160, 110, 0.7)', gradientColorDegree: 120 },
-          { gradientColorStart: 'rgba(210, 190, 150, 0.8)', gradientColorEnd: 'rgba(190, 170, 130, 0.7)', gradientColorDegree: 120 },
-          { gradientColorStart: 'rgba(190, 210, 150, 0.8)', gradientColorEnd: 'rgba(170, 190, 130, 0.7)', gradientColorDegree: 120 }
+          { gradientColorStart: 'rgba(200, 200, 200, 0.7)', gradientColorEnd: 'rgba(180, 180, 180, 0.5)', gradientColorDegree: 120 },
+          { gradientColorStart: 'rgba(180, 180, 180, 0.7)', gradientColorEnd: 'rgba(160, 160, 160, 0.5)', gradientColorDegree: 120 },
+          { gradientColorStart: 'rgba(220, 220, 220, 0.7)', gradientColorEnd: 'rgba(190, 190, 190, 0.5)', gradientColorDegree: 120 }
         ],
         delay: 60,
         fallSpeed: 1.2,
@@ -292,49 +249,41 @@
   });
 </script>
 
-<!-- MODAL -->
-<div id="musicModal" class="modal-custom">
-  <div class="modal-content-custom">
-    <img src="photo.png" alt="invite" style="width:100%; max-width:300px; margin:0 auto;">
-    <button id="playMusic">Шақыртуды ашу</button>
-  </div>
-</div>
-
-<!-- AUDIO -->
+<!-- AUDIO (фондық музыка) -->
 <audio id="backgroundMusic" loop playsinline preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <!-- IMAGE 1 -->
 <div class="element-animation" style="margin:0;padding:0;">
-  <img src="photo1.png" style="width:100%;display:block;">
+  <img src="photo1.jpg" alt="photo1" style="width:100%;display:block;">
 </div>
 
 <!-- IMAGE 2 -->
 <div class="element-animation" style="margin:0;padding:0;">
-  <img src="photo2.png" style="width:100%;display:block;">
+  <img src="photo2.jpg" alt="photo2" style="width:100%;display:block;">
 </div>
 
 <!-- IMAGE 3 -->
 <div class="element-animation" style="margin:0;padding:0;">
-  <img src="photo3.png" style="width:100%;display:block;">
+  <img src="photo3.jpg" alt="photo3" style="width:100%;display:block;">
 </div>
 
 <!-- IMAGE 4 (with map link) -->
 <div class="element-animation" style="margin:0;padding:0;">
   <a href="https://2gis.kz/semey/geo/70030076250487585" target="_blank">
-    <img src="photo4.png" style="width:100%;display:block;">
+    <img src="photo4.jpg" alt="photo4" style="width:100%;display:block;">
   </a>
 </div>
 
 <!-- IMAGE 5 -->
 <div class="element-animation" style="margin:0;padding:0;">
-  <img src="photo5.png" style="width:100%;display:block;">
+  <img src="photo5.jpg" alt="photo5" style="width:100%;display:block;">
 </div>
 
 <!-- IMAGE 6 (Background for timer) -->
 <div class="timer-wrapper element-animation" style="margin:0;padding:0;position:relative;">
-  <img src="photo6.png" style="width:100%;display:block;">
+  <img src="photo6.jpg" alt="photo6" style="width:100%;display:block;">
   <div class="timer-overlay">
     <div class="countdown-container">
       <div class="countdown-item">
@@ -362,11 +311,11 @@
 
 <!-- IMAGE 7 (before form) -->
 <div class="element-animation" style="margin:0;padding:0;">
-  <img src="photo7.png" style="width:100%;display:block;">
+  <img src="photo7.jpg" alt="photo7" style="width:100%;display:block;">
 </div>
 
 <!-- FORM -->
-<div style="padding: 20px 15px 30px; background: #f5f2ef;">
+<div style="padding: 20px 15px 30px; background: #f1eff1;">
   <div class="form-container">
     <form class="transparent" method="post" id="form">
       <div class="form-inner">
@@ -404,7 +353,7 @@
 <!-- IMAGE 8 (Instagram link) -->
 <div class="element-animation" style="margin:0;padding:0;">
   <a href="https://www.instagram.com/toiga_shaqyrtugo/" target="_blank">
-    <img src="photo8.png" style="width:100%;display:block;">
+    <img src="photo8.jpg" alt="photo8" style="width:100%;display:block;">
   </a>
 </div>
 
@@ -422,6 +371,7 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.element-animation').forEach(el => observer.observe(el));
 
+    // --- Countdown Timer (17 October 2026 17:00) ---
     function updateCountdown() {
       const end = new Date("October 17, 2026 17:00:00").getTime();
       const now = Date.now();
@@ -501,12 +451,7 @@
       alert('Жауабыңызға рахмет!');
     });
 
-    // --- Modal & Autoscroll + Music ---
-    const modal = document.getElementById('musicModal');
-    const playBtn = document.getElementById('playMusic');
-    const audio = document.getElementById('backgroundMusic');
-
-    // Autoscroll settings
+    // --- Autoscroll ---
     const SPEED_PX_PER_SEC = 100;
     const RESTART_DELAY_MS = 5000;
     let isRunning = false;
@@ -568,27 +513,17 @@
     window.addEventListener('mousedown', onInteract, { passive: true });
     window.addEventListener('keydown', onInteract, { passive: true });
 
-    function closeModal() {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-      // show all hidden elements
-      document.querySelectorAll('.element-animation').forEach(el => el.classList.add('element-show'));
-      // start autoscroll
+    // Автопрокрутка мен музыканы дереу бастау
+    const audio = document.getElementById('backgroundMusic');
+    audio.play().catch(() => console.log('Audio autoplay blocked'));
+
+    setTimeout(() => {
       if (!rafId) rafId = requestAnimationFrame(loop);
-      restartAfterDelay();
-    }
-
-    playBtn.addEventListener('click', () => {
-      audio.play().catch(() => {});
-      closeModal();
-    });
-
-    // Initially block scroll
-    document.body.style.overflow = 'hidden';
+      startAuto();
+    }, 500);
   });
 </script>
 
-<!-- Bootstrap JS (optional for some features) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" async></script>
 
 </body>
